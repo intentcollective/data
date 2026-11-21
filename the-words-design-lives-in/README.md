@@ -2,7 +2,7 @@
 
 A generative data visualization of the 41 course descriptions in SCAD Graphic Design (GRDS) and Graphic Design and Visual Experience (GDVX), 2026–2027 catalog. It was made as a practice piece for the Generative Communication course.
 
-Each ring is one course description from the SCAD 2026–2027 catalog, ordered from 201 at the center to 792 at the edge. Thirty-seven design keywords carry their own hue, lighter as they recur, and a line joins every pair of matching words. Strategy courses, grounded in discourse, turn clockwise. Literacy courses, grounded in visual praxis, turn counterclockwise. Each ring keeps a pace set by its keywords, and every line is redrawn as the words move. Their movement together is Synthesis. Ten moments, ten posters, one generative system.
+Each ring is one course description from the SCAD Graphic Design and Visual Experience program, ordered from 201 at the center to 792 at the edge. Thirty-seven design keywords carry their own hue, lighter as they recur, and a line joins every pair of matching keywords. Strategy courses, grounded in discourse, turn clockwise. Literacy courses, grounded in visual praxis, turn counterclockwise. Each ring keeps a pace set by its keywords, and every line is redrawn as the words move. Their movement together is Synthesis. Ten moments, ten posters, one generative system.
 
 ## Folders
 

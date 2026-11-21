@@ -42,7 +42,14 @@ BASE='the-words-design-lives-in/downloads'
 menu=open('menu.html').read() if False else None
 ns={}; exec(open('build_index.py').read(),ns)   # reuse css from the first build
 EXTRA_CSS='''
-#menu .head{color:#fff;margin:0 0 2px;}
+#menu .head,#about .head{color:#fff;margin:0 0 6px;padding-top:9px;border-top:1px solid #3a3a3a;}
+body:not(.compact) #menu{width:220px;}
+#about{position:fixed;right:24px;width:220px;font-size:13px;line-height:1.55;z-index:2;}
+#about p{margin:0;}
+.abouttext{color:#fff;}
+#menu .about-in-menu{display:none;margin-bottom:22px;}
+body.compact #about{display:none;}
+body.compact #menu .about-in-menu{display:block;}
 #menu .title{font-size:20px;line-height:1.15;margin-bottom:6px;}
 #menu .subtitle{color:#7a7a7a;margin-bottom:24px;}
 #menu .system{margin-bottom:22px;}
@@ -56,6 +63,8 @@ EXTRA_CSS='''
 #menu .downloads{margin-bottom:20px;}
 #menu .system .lw{color:#7a7a7a;}
 #menu .credit{color:#7a7a7a;font-size:11px;line-height:1.45;margin-top:26px;}
+#menu .credit a.ic{color:#7a7a7a;text-decoration:none;outline:none;transition:color .15s;}
+#menu .credit a.ic:hover,#menu .credit a.ic:focus-visible{color:#B23A2E;text-decoration:none;outline:none;}
 body:not(.compact) #menu{bottom:24px;display:flex;flex-direction:column;overflow-y:auto;}
 body:not(.compact) #menu .credit{margin-top:auto;padding-top:26px;}
 '''
@@ -65,6 +74,7 @@ menu='''
 <nav id="menu" aria-label="Poster views and downloads">
   <p class="title">The words<br>design lives in.</p>
   <p class="subtitle">Generative data visualization</p>
+  <div class="about-in-menu"><p class="head">About</p><p class="abouttext">Each ring is one course description from the SCAD Graphic Design and Visual Experience program, ordered from 201 at the center to 792 at the edge. Thirty-seven design keywords carry their own hue, lighter as they recur, and a line joins every pair of matching keywords. Strategy courses, grounded in discourse, turn clockwise. Literacy courses, grounded in visual praxis, turn counterclockwise. Each ring keeps a pace set by its keywords, and every line is redrawn as the words move. Their movement together is Synthesis. Ten moments, ten posters, one generative system.</p></div>
   <p class="head">Variable</p>
   <div class="system">
     <p class="lw">Line weight <span id="lwValue">1.00 pt</span></p>
@@ -78,7 +88,6 @@ menu='''
   <p class="head">Motion</p>
   <ul class="views">
     <li><a href="#continuous" data-mode="flow">Continuous</a></li>
-    <li><a href="#step" data-mode="tick">Step</a></li>
   </ul>
   <p class="head">Static</p>
   <ul class="views">
@@ -89,7 +98,7 @@ menu='''
     <p class="dlrow"><span class="label" id="dlLabel">All 10</span><a id="dlPdf" download>PDF</a><a id="dlSvg" download>SVG</a><a id="dlPng" download>PNG</a></p>
     <p class="dlrow"><span class="label">Motion</span><a href="the-words-design-lives-in/motion/The_words_design_lives_in_1440x2040.mp4" download>MP4</a></p>
   </div>
-  <p class="credit">© 2026 INTENT COLLECTIVE™<br>Designed by Henry Hongmin Kim</p>
+  <p class="credit"><a class="ic" href="https://intentcollective.design">© 2026 INTENT COLLECTIVE™</a></p>
 </nav>'''
 css=css.replace('''main{display:flex;justify-content:center;align-items:center;min-height:100vh;}
 #poster{display:block;height:100vh;width:auto;max-width:100vw;}
@@ -165,7 +174,7 @@ function setState(m,f){
 }
 function fromHash(){
   const h=location.hash.slice(1);
-  if(h==='continuous'||h==='flow') return setState('flow'); if(h==='step'||h==='tick') return setState('tick');
+  if(h==='continuous'||h==='flow') return setState('flow'); if(h==='step'||h==='tick') return setState('flow');
   const n=parseInt(h,10); if(n>=1&&n<=10) return setState('still',n-1);
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return setState('still',0);
   setState('flow');
@@ -179,7 +188,10 @@ lw.addEventListener('input',()=>setWeight(+lw.value));
 document.getElementById('lwReset').addEventListener('click',()=>{lw.value=AUTHORED; setWeight(AUTHORED);});
 lwValue.textContent='1.00 pt authored';
 toggle.addEventListener('click',()=>{const o=document.body.classList.toggle('open'); toggle.setAttribute('aria-expanded',String(o));});
-function layout(){ const r=stage.getBoundingClientRect(); document.body.classList.toggle('compact', r.left<232); if(r.left>=232) document.body.classList.remove('open'); resize(); }
+const about=document.getElementById('about');
+function layout(){ const r=stage.getBoundingClientRect(); const narrow=r.left<268; document.body.classList.toggle('compact', narrow); if(!narrow) document.body.classList.remove('open');
+  const v=[...document.querySelectorAll('#menu > .head')].find(h=>h.textContent==='Variable'); if(v&&!narrow) about.style.top=v.getBoundingClientRect().top+'px';
+  resize(); }
 window.addEventListener('resize',layout);
 Promise.all([document.fonts.ready]).then(()=>{layout(); fromHash();});
 layout();
@@ -205,6 +217,7 @@ html=f'''<!DOCTYPE html>
 </head>
 <body>
 {menu}
+<aside id="about" aria-label="About this piece"><p class="head">About</p><p class="abouttext">Each ring is one course description from the SCAD Graphic Design and Visual Experience program, ordered from 201 at the center to 792 at the edge. Thirty-seven design keywords carry their own hue, lighter as they recur, and a line joins every pair of matching keywords. Strategy courses, grounded in discourse, turn clockwise. Literacy courses, grounded in visual praxis, turn counterclockwise. Each ring keeps a pace set by its keywords, and every line is redrawn as the words move. Their movement together is Synthesis. Ten moments, ten posters, one generative system.</p></aside>
 <main>
 {stage}
 </main>

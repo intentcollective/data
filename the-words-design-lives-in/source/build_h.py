@@ -132,7 +132,7 @@ for word in PARA.split():
     if width(test,'Regular')[0]*24>PWID and cur: lines.append(cur); cur=word
     else: cur=test
 lines.append(cur)
-PY=PB-2*PL-(len(lines)-1)*PL
+PY=PB-1*PL-(len(lines)-1)*PL
 A(f'<text id="paragraph" font-family="Barlow-Regular, Barlow" font-size="24" fill="#000000" transform="translate({PX0} {PY:.3f})">'+''.join(f'<tspan x="0" y="{j*PL:.1f}">{esc(l)}</tspan>' for j,l in enumerate(lines))+'</text>')
 # logo scaled to 3" wide, anchored bottom-left on the margins
 LG=STATIC[STATIC.index('<g id="logo"'):]
