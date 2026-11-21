@@ -6,9 +6,11 @@ Each ring is one course description, ordered from 201 at the center to 792 at th
 
 ## Folders
 
-- The live web version is `index.html` at the top of this repository, published at intentcollective.design/data. It loads Barlow from Google Fonts and holds still on frame 1 when the viewer has reduced motion turned on.
+- The live web version is `index.html` at the top of this repository, published at intentcollective.design/data. Its menu offers two motion modes, Tick and Flow, each of the ten posters, the MP4, and downloads. A line weight slider lets viewers explore the system from 0.25 to 2 pt. The designer’s authored value is 1 pt, and the posters and downloads always stay at 1 pt. The page holds still on poster 01 when the viewer has reduced motion turned on.
 - `motion` holds the motion poster, 1440 × 2040 px, H.264, 30 fps, 10 seconds, seamless loop.
-- `posters/A1` holds the ten final static posters, A1 portrait (594 × 841 mm), one per frame.
+- `downloads` holds the files offered on the website. `pdf` has print-ready A1 PDFs with fonts embedded. `svg` has SVGs with fonts built in, for use on websites. `png` has 1440 × 2040 images for portfolio platforms and social media. `zip` has all ten posters in each format.
+- `web-layers` holds the two ring layers the website rotates, one for Strategy courses and one for Literacy courses.
+- `posters/A1` holds the ten final static posters as editable source files, A1 portrait (594 × 841 mm), one per frame.
 - `posters/A0` holds the A0 layout template the series was developed from.
 - `frames-png` holds each frame as a 1440 × 2040 PNG and a contact sheet of all ten.
 - `process` holds earlier studies, from the first fixed-size rings to the line weight tests.
