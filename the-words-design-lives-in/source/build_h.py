@@ -3,7 +3,7 @@ from metrics import width
 exec(open('build_c.py').read().split('# ---------- ring text')[0].split('K=0.75')[1].split('\n',1)[1]
      .replace("def tier","def _tier").replace("PINK=","_PINK="), globals())   # reuse RANK, REG, classify
 c=json.load(open('courses.json'))
-PW,PH=2384,3370; N=len(c); K=1.0; LW=float(sys.argv[1]); FRAME=int(sys.argv[2]); CS=11.0; PRS=12.74
+PW,PH=2384,3370; N=len(c); K=1.0; LW=float(sys.argv[1]); FRAME=float(sys.argv[2]); CS=11.0; PRS=12.74
 MAR4=288.0; MAR2=144.0
 # ---------- colours: one hue per word, lighter = more frequent ----------
 def oklch(L,C,h):
@@ -37,7 +37,8 @@ S=REXT/(a+0.75); D=S/K; R=a*S; r0=R-(N-1)*D
 cx=PW/2; cy=MAR4+REXT
 # ---------- locate words ----------
 STRAT={'229','301','376','380','402','408','440','479','480','503','701','702','749','770','779F','789','791','792'}
-def rot(num): return (36*FRAME if num in STRAT else -72*FRAME)
+SPEED=json.load(open('speeds.json'))['speed']
+def rot(num): return SPEED[num]*FRAME
 occ=[[] for _ in RANK]; ring_parts=[]; WORDS=[]
 for i,r in enumerate(rings):
     rad=r0+i*D; t=(2*math.pi*rad-r['Wu']*S)/r['n']
@@ -138,7 +139,7 @@ LG=STATIC[STATIC.index('<g id="logo"'):]
 L0,LB,LWID=146.25,3222.38,295.0; sc=216/LWID
 A(f'<g id="logo-3in" transform="translate({MAR2} {last}) scale({sc:.5f}) translate({-L0} {-LB})">'+LG+'</g>')
 A('</svg>')
-open(f'frames/A0c_f{FRAME:02d}.svg','w').write('\n'.join(o))
+open(f'frames/A0c_f{int(FRAME):02d}.svg','w').write('\n'.join(o))
 print('para lines',len(lines),'PY',round(PY,1),'title b1',round(TB1,1),'b2',round(TB1+295.31,1),'stats last',round(LASTROW,1),'S',round(S,3),'D',round(D,3),'r0',round(r0,1),'R',round(R,1),'cy',cy,'spine leading',round(LEAD,2),'paragraph lines',len(lines),file=sys.stderr)
 print('\n'.join(f'{RANK[k][1]} {COL[k]}' for k in range(RL)),file=sys.stderr)
 
