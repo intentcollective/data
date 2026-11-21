@@ -41,7 +41,14 @@ body.compact #menu{display:none;top:0;left:0;width:auto;right:0;bottom:0;padding
 body.compact #menu > *{max-width:240px;}
 body.compact.open #menu{display:block;}
 
-#menu .head{color:#fff;margin:0 0 2px;}
+#menu .head,#about .head{color:#fff;margin:0 0 6px;padding-top:9px;border-top:1px solid #3a3a3a;}
+body:not(.compact) #menu{width:220px;}
+#about{position:fixed;right:24px;width:220px;font-size:13px;line-height:1.55;z-index:2;}
+#about p{margin:0;}
+.abouttext{color:#fff;}
+#menu .about-in-menu{display:none;margin-bottom:22px;}
+body.compact #about{display:none;}
+body.compact #menu .about-in-menu{display:block;}
 #menu .title{font-size:20px;line-height:1.15;margin-bottom:6px;}
 #menu .subtitle{color:#7a7a7a;margin-bottom:24px;}
 #menu .system{margin-bottom:22px;}
@@ -67,6 +74,7 @@ body:not(.compact) #menu .credit{margin-top:auto;padding-top:26px;}
 <nav id="menu" aria-label="Poster views and downloads">
   <p class="title">The words<br>design lives in.</p>
   <p class="subtitle">Generative data visualization</p>
+  <div class="about-in-menu"><p class="head">About</p><p class="abouttext">Each ring is one course description from the SCAD 2026–2027 catalog, ordered from 201 at the center to 792 at the edge. Thirty-seven design keywords carry their own hue, lighter as they recur, and a line joins every pair of matching words. Strategy courses, grounded in discourse, turn clockwise. Literacy courses, grounded in visual praxis, turn counterclockwise. Each ring keeps a pace set by its keywords, and every line is redrawn as the words move. Their movement together is Synthesis. Ten moments, ten posters, one generative system.</p></div>
   <p class="head">Variable</p>
   <div class="system">
     <p class="lw">Line weight <span id="lwValue">1.00 pt</span></p>
@@ -92,6 +100,7 @@ body:not(.compact) #menu .credit{margin-top:auto;padding-top:26px;}
   </div>
   <p class="credit"><a class="ic" href="https://intentcollective.design">© 2026 INTENT COLLECTIVE™</a></p>
 </nav>
+<aside id="about" aria-label="About this piece"><p class="head">About</p><p class="abouttext">Each ring is one course description from the SCAD 2026–2027 catalog, ordered from 201 at the center to 792 at the edge. Thirty-seven design keywords carry their own hue, lighter as they recur, and a line joins every pair of matching words. Strategy courses, grounded in discourse, turn clockwise. Literacy courses, grounded in visual praxis, turn counterclockwise. Each ring keeps a pace set by its keywords, and every line is redrawn as the words move. Their movement together is Synthesis. Ten moments, ten posters, one generative system.</p></aside>
 <main>
 <div id="poster" role="img" aria-label="The words design lives in. Forty-one SCAD Graphic Design course descriptions as rings, with lines joining matching design keywords.">
 <svg class="layer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1683.78 2383.94"><rect width="1683.78" height="2383.94" fill="#FFFFFF"/><g id="A1-scale" transform="translate(0 1.882) scale(0.706284)">
@@ -688,7 +697,10 @@ lw.addEventListener('input',()=>setWeight(+lw.value));
 document.getElementById('lwReset').addEventListener('click',()=>{lw.value=AUTHORED; setWeight(AUTHORED);});
 lwValue.textContent='1.00 pt authored';
 toggle.addEventListener('click',()=>{const o=document.body.classList.toggle('open'); toggle.setAttribute('aria-expanded',String(o));});
-function layout(){ const r=stage.getBoundingClientRect(); document.body.classList.toggle('compact', r.left<232); if(r.left>=232) document.body.classList.remove('open'); resize(); }
+const about=document.getElementById('about');
+function layout(){ const r=stage.getBoundingClientRect(); const narrow=r.left<268; document.body.classList.toggle('compact', narrow); if(!narrow) document.body.classList.remove('open');
+  const v=[...document.querySelectorAll('#menu > .head')].find(h=>h.textContent==='Variable'); if(v&&!narrow) about.style.top=v.getBoundingClientRect().top+'px';
+  resize(); }
 window.addEventListener('resize',layout);
 Promise.all([document.fonts.ready]).then(()=>{layout(); fromHash();});
 layout();
