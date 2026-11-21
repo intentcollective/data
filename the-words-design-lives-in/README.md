@@ -24,4 +24,4 @@ Barlow (Regular, Medium, SemiBold, Bold) from Google Fonts. Install it before op
 
 The scripts were written for a working session and still contain absolute file paths. They document the logic of the system more than they offer a ready-made tool.
 
-© Henry Kim, Intent Collective
+© 2026 INTENT COLLECTIVE™
