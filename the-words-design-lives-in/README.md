@@ -6,7 +6,7 @@ Each ring is one course description, ordered from 201 at the center to 792 at th
 
 ## Folders
 
-- `web` holds the live web version. Open `index.html` in a browser. It loads Barlow from Google Fonts and holds still on frame 1 when the viewer has reduced motion turned on.
+- The live web version is `index.html` at the top of this repository, published at intentcollective.design/data. It loads Barlow from Google Fonts and holds still on frame 1 when the viewer has reduced motion turned on.
 - `motion` holds the motion poster, 1440 × 2040 px, H.264, 30 fps, 10 seconds, seamless loop.
 - `posters/A1` holds the ten final static posters, A1 portrait (594 × 841 mm), one per frame.
 - `posters/A0` holds the A0 layout template the series was developed from.
