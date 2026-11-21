@@ -6,7 +6,7 @@ Each ring is one course description from the SCAD 2026–2027 catalog, ordered f
 
 ## Folders
 
-- The live web version is `index.html` at the top of this repository, published at intentcollective.design/data. Its menu offers two motion modes, Continuous (the default) and Step, each of the ten posters, the MP4, and downloads. A line weight slider lets viewers explore the system from 0.25 to 2 pt. The designer’s authored value is 1 pt, and the posters and downloads always stay at 1 pt. The page holds still on poster 01 when the viewer has reduced motion turned on.
+- The live web version is `index.html` at the top of this repository, published at intentcollective.design/data. Its menu offers the continuous motion (the default), each of the ten posters, the MP4, and downloads. A line weight slider lets viewers explore the system from 0.25 to 2 pt. The designer’s authored value is 1 pt, and the posters and downloads always stay at 1 pt. The page holds still on poster 01 when the viewer has reduced motion turned on.
 - `motion` holds the motion poster, 1440 × 2040 px, H.264, 30 fps, 10 seconds of continuous motion. Each ring turns at its own speed, so the system never repeats and the video does not loop seamlessly.
 - `downloads` holds the files offered on the website. `pdf` has print-ready A1 PDFs with fonts embedded. `svg` has SVGs with fonts built in, for use on websites. `png` has 1440 × 2040 images for portfolio platforms and social media. `zip` has all ten posters in each format.
 - `posters/A1` holds the ten final static posters as editable source files, one moment per second of the motion, A1 portrait (594 × 841 mm), one per frame.

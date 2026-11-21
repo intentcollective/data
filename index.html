@@ -80,7 +80,6 @@ body:not(.compact) #menu .credit{margin-top:auto;padding-top:26px;}
   <p class="head">Motion</p>
   <ul class="views">
     <li><a href="#continuous" data-mode="flow">Continuous</a></li>
-    <li><a href="#step" data-mode="tick">Step</a></li>
   </ul>
   <p class="head">Static</p>
   <ul class="views">
@@ -675,7 +674,7 @@ function setState(m,f){
 }
 function fromHash(){
   const h=location.hash.slice(1);
-  if(h==='continuous'||h==='flow') return setState('flow'); if(h==='step'||h==='tick') return setState('tick');
+  if(h==='continuous'||h==='flow') return setState('flow'); if(h==='step'||h==='tick') return setState('flow');
   const n=parseInt(h,10); if(n>=1&&n<=10) return setState('still',n-1);
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return setState('still',0);
   setState('flow');
