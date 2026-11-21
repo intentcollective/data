@@ -42,6 +42,12 @@ body.compact #menu > *{max-width:240px;}
 body.compact.open #menu{display:block;}
 
 #menu .head{color:#fff;margin:0 0 2px;}
+#menu .title{font-size:20px;line-height:1.15;margin-bottom:6px;}
+#menu .subtitle{color:#7a7a7a;margin-bottom:24px;}
+#menu .system{margin-bottom:22px;}
+#menu .dlrow{display:flex;gap:14px;}
+#menu .dlrow .label{color:#7a7a7a;width:64px;flex:none;}
+#menu .dlrow a{margin:0;}
 #menu ul{margin-bottom:20px;}
 #menu ul a{position:relative;}
 #menu a.on{color:#fff;}
@@ -57,23 +63,9 @@ body:not(.compact) #menu .credit{margin-top:auto;padding-top:26px;}
 
 <button id="menuToggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
 <nav id="menu" aria-label="Poster views and downloads">
-  <p class="title">The words design lives in.</p>
-  <p class="head">Motion</p>
-  <ul class="views">
-    <li><a href="#tick" data-mode="tick">Tick</a></li>
-    <li><a href="#flow" data-mode="flow">Flow</a></li>
-    <li><a href="the-words-design-lives-in/motion/The_words_design_lives_in_1440x2040.mp4" target="_blank" rel="noopener">MP4 ↗</a></li>
-  </ul>
-  <p class="head">Static</p>
-  <ul class="views">
-    <li><a href="#01" data-frame="0">01</a></li><li><a href="#02" data-frame="1">02</a></li><li><a href="#03" data-frame="2">03</a></li><li><a href="#04" data-frame="3">04</a></li><li><a href="#05" data-frame="4">05</a></li><li><a href="#06" data-frame="5">06</a></li><li><a href="#07" data-frame="6">07</a></li><li><a href="#08" data-frame="7">08</a></li><li><a href="#09" data-frame="8">09</a></li><li><a href="#10" data-frame="9">10</a></li>
-  </ul>
-  <p class="head">Download</p>
-  <div class="downloads">
-    <p class="note" id="dlLabel">All ten posters</p>
-    <p class="row"><a id="dlPdf" download>PDF</a><a id="dlSvg" download>SVG</a><a id="dlPng" download>PNG</a></p>
-  </div>
-  <p class="head">System</p>
+  <p class="title">The words<br>design lives in.</p>
+  <p class="subtitle">Generative data visualization</p>
+  <p class="head">Variable</p>
   <div class="system">
     <p class="lw">Line weight <span id="lwValue">1.00 pt</span></p>
     <div class="slider">
@@ -83,7 +75,21 @@ body:not(.compact) #menu .credit{margin-top:auto;padding-top:26px;}
     <p class="scale"><span>0.25</span><button type="button" id="lwReset">1 pt authored</button><span>2</span></p>
     <p class="note" id="lwNote">1 pt is the designer’s authored value. Explore the system freely. The posters and downloads always stay at 1 pt.</p>
   </div>
-  <p class="credit">© 2026 intent collective™<br>Designed by Henry Hongmin Kim</p>
+  <p class="head">Motion</p>
+  <ul class="views">
+    <li><a href="#step" data-mode="tick">Step</a></li>
+    <li><a href="#continuous" data-mode="flow">Continuous</a></li>
+  </ul>
+  <p class="head">Static</p>
+  <ul class="views">
+    <li><a href="#01" data-frame="0">01</a></li><li><a href="#02" data-frame="1">02</a></li><li><a href="#03" data-frame="2">03</a></li><li><a href="#04" data-frame="3">04</a></li><li><a href="#05" data-frame="4">05</a></li><li><a href="#06" data-frame="5">06</a></li><li><a href="#07" data-frame="6">07</a></li><li><a href="#08" data-frame="7">08</a></li><li><a href="#09" data-frame="8">09</a></li><li><a href="#10" data-frame="9">10</a></li>
+  </ul>
+  <p class="head">Download</p>
+  <div class="downloads">
+    <p class="dlrow"><span class="label" id="dlLabel">All 10</span><a id="dlPdf" download>PDF</a><a id="dlSvg" download>SVG</a><a id="dlPng" download>PNG</a></p>
+    <p class="dlrow"><span class="label">Motion</span><a href="the-words-design-lives-in/motion/The_words_design_lives_in_1440x2040.mp4" download>MP4</a></p>
+  </div>
+  <p class="credit">© 2026 INTENT COLLECTIVE™<br>Designed by Henry Hongmin Kim</p>
 </nav>
 <main>
 <div id="poster" role="img" aria-label="The words design lives in. Forty-one SCAD Graphic Design course descriptions as rings, with lines joining matching design keywords.">
@@ -658,7 +664,7 @@ function setDownloads(){
     dl.svg.href=BASE+'/svg/The_words_design_lives_in_A1_'+n+'.svg';
     dl.png.href=BASE+'/png/The_words_design_lives_in_'+n+'_1440x2040.png';
   } else {
-    dlLabel.textContent='All ten posters';
+    dlLabel.textContent='All 10';
     ['pdf','svg','png'].forEach(t=>dl[t].href=BASE+'/zip/The_words_design_lives_in_10_posters_'+t+'.zip');
   }
 }
@@ -670,7 +676,7 @@ function setState(m,f){
 }
 function fromHash(){
   const h=location.hash.slice(1);
-  if(h==='flow'||h==='tick') return setState(h);
+  if(h==='continuous'||h==='flow') return setState('flow'); if(h==='step'||h==='tick') return setState('tick');
   const n=parseInt(h,10); if(n>=1&&n<=10) return setState('still',n-1);
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return setState('still',0);
   setState('tick');
